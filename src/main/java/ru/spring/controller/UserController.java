@@ -11,8 +11,12 @@ import ru.spring.service.UserService;
 @RequestMapping("/")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
     public String tableUsers(Model model) {
@@ -46,7 +50,7 @@ public class UserController {
 
     @PostMapping("/{id}")
     public String updateUser(@PathVariable Long id, @ModelAttribute ("user") User user) {
-        userService.update(id, user);
+        userService.update(user);
         return "redirect:/";
     }
 

@@ -1,17 +1,13 @@
 package ru.spring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -21,8 +17,12 @@ import java.util.Properties;
 @ComponentScan("ru.spring")
 public class AppConfig {
 
+    private final Environment env;
+
     @Autowired
-    private Environment env;
+    public AppConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource getDataSource() {
@@ -35,10 +35,10 @@ public class AppConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean getEntityFactory() {
+    public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPackagesToScan("ru.spring");
+        factoryBean.setPackagesToScan("ru.spring.model");
         factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties props=new Properties();
@@ -52,7 +52,7 @@ public class AppConfig {
     @Bean
     public JpaTransactionManager getTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(getEntityFactory().getObject());
+        transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
         return transactionManager;
     }
 
