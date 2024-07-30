@@ -24,6 +24,7 @@ public class AppConfig {
         this.env = env;
     }
 
+    @SuppressWarnings("null")
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
