@@ -1,6 +1,5 @@
 package ru.spring.service;
 
-import org.springframework.transaction.annotation.Transactional;
 import ru.spring.model.User;
 
 import java.util.List;

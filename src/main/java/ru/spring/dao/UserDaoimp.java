@@ -1,6 +1,5 @@
 package ru.spring.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ru.spring.model.User;
@@ -14,11 +13,6 @@ public class UserDaoimp implements UserDao {
 
     @PersistenceContext
     private EntityManager em;
-
-//    @Autowired
-//    public UserDaoimp(EntityManager em) {
-//        this.em = em;
-//    }
 
     @Override
     public void add(User user) {
