@@ -32,7 +32,7 @@ public class UserDaoimp implements UserDao {
 
     @Override
     public void deleteById(long id) {
-        em.remove(findById(id));
+        em.createQuery("delete from User user where user.id = :id").setParameter("id", id).executeUpdate();
     }
 
     @Override

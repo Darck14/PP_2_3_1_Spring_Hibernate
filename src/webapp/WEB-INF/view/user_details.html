@@ -11,8 +11,9 @@
 <p>Name: <span th:text="${user.getName()}"></span></p>
 <p>Sername: <span th:text="${user.getSername()}"></span></p>
 <p>Sex: <span th:text="${user.getSex()}"></span></p>
+
 <a href="/edit/{id}" th:href="@{/edit/{id}(id=${user.getId()})}">Edit</a>
-<a href="/">Back to list</a>
+<a href="/PP_2_3_1_Spring_Hibernate/">Back to list</a>
 
 </body>
 </html>

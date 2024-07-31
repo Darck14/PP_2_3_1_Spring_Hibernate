@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping("/{id}")
     public String showUser(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
-        return "/user_details";
+        return "user_details";
     }
 
     @GetMapping("/edit/{id}")
